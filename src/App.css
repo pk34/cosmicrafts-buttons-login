@@ -1,0 +1,58 @@
+.div-btn-login{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+  width: 125px;
+  height: 51px;
+  background-image: url("./resources/btn_sign.png");
+  background-size: cover;
+}
+.txt-btn-login{
+  position: absolute;
+  top: 17px;
+  left: 0px;
+  width: 125px;
+  text-align: center;
+  color: #FFFFFF;
+  font-family: 'Orbitron';
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.div-wallets-login{
+  position: absolute;
+  top: 50px;
+  background-image: url("./resources/box.png");
+  background-size: cover;
+  padding: 10px;
+}
+.btn-link{
+  display: block;
+  margin-top: 5px;
+  width: 125px;
+  text-align: center;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.img-wallet{
+  max-width: 25px;
+  max-height: 25px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.div-wallet-connected{
+  width: 215px;
+  height: 44px;
+  background-image: url("./resources/Vector_40.png");
+  background-size: cover;
+}
+.txt-wallet{
+  display: block;
+  width: 215px;
+  text-align: center;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding-top: 12px;
+}
