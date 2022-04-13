@@ -129,9 +129,7 @@ function App() {
             </div>
             : 
             <>
-              <div className='div-btn-login' onClick={() => { connecting(); }}>
-                <label className='txt-btn-login'>{walletData.walletState === "connecting" ? "Connecting" : "Connect"}</label>
-              </div>
+              <a href="" class="elementor-button-link elementor-button elementor-size-sm" role="button"  onClick={() => { connecting(); }}> <span class="elementor-button-content-wrapper"> <span class="elementor-button-icon elementor-align-icon-left"> <i aria-hidden="true" class="fas fa-wallet"></i> </span> <span class="elementor-button-text">{walletData.walletState === "connecting" ? "Connecting" : "Wallet connect"}</span></span></a>
               {
                 walletData.walletState === "connecting" ?
                 <div className='div-wallets-login'>
