@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './App.css';
 import { AppContext } from './context';
 import { Actor, HttpAgent } from "@dfinity/agent";
 import { AuthClient } from "@dfinity/auth-client";
 import {StoicIdentity} from "ic-stoic-identity";
-import box from "./resources/box.png";
 import plug from "./resources/PLUG.png";
 import stoic from "./resources/stoic.png";
 import earth from "./resources/earth.png";
 import identity from "./resources/dfinity.png";
+import wallet from "./resources/connect/wallet.svg";
+import lock from "./resources/connected/lock_icon.svg";
+import walletcopy from "./resources/connected/copy_icon.svg";
 
 function App() {
   let { walletData, setWalletData } = useContext(AppContext);
@@ -18,6 +20,8 @@ function App() {
         'b7g3n-niaaa-aaaaj-aadlq-cai',
         'e3q2w-lqaaa-aaaai-aazva-cai'
     ];
+    const [options, setOptions] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const agent = new HttpAgent({
         host: 'https://mainnet.dfinity.network',
@@ -103,47 +107,95 @@ function App() {
     };
 
     const connecting = () => {
-      let _wallet = {wallet: "", walletState: "connecting", user: "", walletConnected: ""};
+      if(walletData.walletState === "connecting"){
+        let _wallet = {wallet: "", walletState: "connect", user: "", walletConnected: ""};
         setWalletData(_wallet);
         localStorage.setItem("cosmic_user", JSON.stringify(_wallet));
+      } else {
+        let _wallet = {wallet: "", walletState: "connecting", user: "", walletConnected: ""};
+        setWalletData(_wallet);
+        localStorage.setItem("cosmic_user", JSON.stringify(_wallet));
+      }
     };
 
     const logout = () => {
-        let _wallet = {wallet: "", walletState: "disconnected", user: "", walletConnected: ""};
-        setWalletData(_wallet);
-        localStorage.setItem("cosmic_user", JSON.stringify(_wallet));
+      setOptions(false);
+      let _wallet = {wallet: "", walletState: "disconnected", user: "", walletConnected: ""};
+      setWalletData(_wallet);
+      localStorage.setItem("cosmic_user", JSON.stringify(_wallet));
     }
 
   const reduceChars = (full) => {
-    return full.substring(0,3) + "..." + full.substring(full.lenght-6, 5);
+    return full.substring(0,5) + "..." + full.substring(full.lenght-4, 3);
   }
+
+  const copy = () => {
+    setCopied(true);
+    navigator.clipboard.writeText(walletData.wallet);
+    setTimeout(() => {
+      setCopied(false);
+    }, 5000);
+  }
+
+  const toggleOptions = () => {
+    setOptions(!options);
+  };
+
+  useEffect(()=>{
+    //
+  }, [options]);
 
   return (
     <div className="App">
       <header className="App-header">
-        <label>
-          {
-            walletData.walletState === "connected" ? 
+        {
+          walletData.walletState === "connected" ? 
+          <>
             <div className='div-wallet-connected'>
-              <label className='txt-wallet' onClick={() => { logout(); }}>Connected&nbsp;{ reduceChars(walletData.wallet) }</label>
+              <label className='txt-wallet' onClick={() => { toggleOptions(); }}><img src={wallet} alt='wallet icon' className='img-wallet-connected' />{ reduceChars(walletData.wallet) }</label>
             </div>
-            : 
-            <>
-              <a href="" class="elementor-button-link elementor-button elementor-size-sm" role="button"  onClick={() => { connecting(); }}> <span class="elementor-button-content-wrapper"> <span class="elementor-button-icon elementor-align-icon-left"> <i aria-hidden="true" class="fas fa-wallet"></i> </span> <span class="elementor-button-text">{walletData.walletState === "connecting" ? "Connecting" : "Wallet connect"}</span></span></a>
-              {
-                walletData.walletState === "connecting" ?
-                <div className='div-wallets-login'>
-                  <label className='btn-link' onClick={() => { connectWallet("plug"); }} ><img src={plug} className='img-wallet' />Plug</label>
-                  <label className='btn-link' onClick={() => { connectWallet("stoic"); }} ><img src={stoic} className='img-wallet' />Stoic</label>
-                  <label className='btn-link' onClick={() => { connectWallet("earth"); }} ><img src={earth} className='img-wallet' />Earth</label>
-                  <label className='btn-link' onClick={() => { connectWallet("InternetIdentity"); }} ><img src={identity} className='img-wallet' />Identity</label>
+            {
+              options === true ?
+              <div className='div-panel-option'>
+                <div className='div-option' onClick={() => { copy(); }}>
+                  <label className='txt-option'><img src={walletcopy} className='img-option-copy' />{ copied === true ? "Copied to clipboard" : "Copy Address"}</label>
                 </div>
-                :
-                <></>
-              }
-            </>
-          }
-        </label>
+                <div className='div-option' onClick={() => { logout(); }}>
+                  <label className='txt-option'><img src={lock} className='img-option' />Logout</label>
+                </div>
+              </div>
+              :
+              <>
+              </>
+            }
+          </>
+          : 
+          <>
+            <div className='div-btn-login' onClick={() => { connecting(); }}>
+              <img src={wallet} alt='wallet icon' className='img-wallet-connect' />
+              <label className='txt-btn-login'>{walletData.walletState === "connecting" ? "Connecting..." : "Wallet connect"}</label>
+            </div>
+            {
+              walletData.walletState === "connecting" ?
+              <div className='div-wallets-login'>
+                <div className='div-link'>
+                  <label className='btn-link' onClick={() => { connectWallet("plug"); }} ><img src={plug} className='img-wallet-plug' />Plug Wallet</label>
+                </div>
+                <div className='div-link'>
+                  <label className='btn-link' onClick={() => { connectWallet("stoic"); }} ><img src={stoic} className='img-wallet' />Stoic Wallet</label>
+                </div>
+                <div className='div-link'>
+                  <label className='btn-link' onClick={() => { connectWallet("earth"); }} ><img src={earth} className='img-wallet' />Earth Wallet</label>
+                </div>
+                <div className='div-link'>
+                  <label className='btn-link' onClick={() => { connectWallet("InternetIdentity"); }} ><img src={identity} className='img-wallet' />Internet Identity</label>
+                </div>
+              </div>
+              :
+              <></>
+            }
+          </>
+        }
       </header>
     </div>
   );

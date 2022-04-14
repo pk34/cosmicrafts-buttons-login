@@ -1,58 +1,150 @@
 .div-btn-login{
   position: absolute;
-  top: 5px;
-  left: 5px;
-  cursor: pointer;
-  width: 125px;
-  height: 51px;
-  background-image: url("./resources/btn_sign.png");
+  background-image: url("./resources/connect/frame.png");
   background-size: cover;
+  color: #FFFFFF;
+  width: 175px;
+  height: 35px;
+  right: 10px;
+  padding-left: 22px;
+  padding-top: 15px;
+}
+.div-btn-login:hover{
+  background-image: url("./resources/connect/overlaylogin.png");
+  cursor: pointer;
 }
 .txt-btn-login{
-  position: absolute;
-  top: 17px;
+  position: relative;
   left: 0px;
   width: 125px;
   text-align: center;
-  color: #FFFFFF;
-  font-family: 'Orbitron';
+  font-family: 'Inter';
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.img-wallet-connect{
+  width: 15px;
+  display: inline-block;
+  color: #FFFFFF;
+}
+.img-wallet-connect:hover{
+  fill: #FFFFFF;
 }
 
 .div-wallets-login{
   position: absolute;
-  top: 50px;
-  background-image: url("./resources/box.png");
+  top: 70px;
+  background-image: url("./resources/connect/marcodropdown.png");
   background-size: cover;
-  padding: 10px;
+  width: 250px;
+  height: 335px;
+  right: 10px;
+}
+.div-link{
+  background-image: url("./resources/connect/box_unselected.png");
+  background-size: cover;
+  width: 210px;
+  height: 44px;
+  padding-top: 12px;
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+.div-link:hover{
+  background-image: url("./resources/connect/box_hover.png");
 }
 .btn-link{
   display: block;
-  margin-top: 5px;
-  width: 125px;
-  text-align: center;
+  width: 200px;
+  text-align: left;
   color: #FFFFFF;
   cursor: pointer;
+  font-size: 20px;
 }
 .img-wallet{
-  max-width: 25px;
-  max-height: 25px;
+  max-width: 35px;
+  max-height: 35px;
   margin-right: 10px;
   vertical-align: middle;
 }
+.img-wallet-plug{
+  max-width: 35px;
+  max-height: 35px;
+  margin-right: 15px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
 
 .div-wallet-connected{
-  width: 215px;
-  height: 44px;
-  background-image: url("./resources/Vector_40.png");
+  background-image: url("./resources/connect/frame.png");
   background-size: cover;
+  position: absolute;
+  right: 10px;
+  width: 175px;
+  height: 35px;
+  padding-left: 22px;
+  padding-top: 15px;
+}
+.div-wallet-connected:hover{
+  cursor: pointer;
+  background-image: url("./resources/connect/overlaylogin.png");
+}
+.img-wallet-connected{
+  width: 15px;
+  display: inline-block;
+  color: #FFFFFF;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+.img-wallet-connected:hover{
+  fill: #FFFFFF;
 }
 .txt-wallet{
-  display: block;
-  width: 215px;
-  text-align: center;
   color: #FFFFFF;
   cursor: pointer;
-  padding-top: 12px;
+}
+
+.div-panel-option{
+  background-image: url("./resources/connected/frame_options.png");
+  background-size: cover;
+  position: absolute;
+  right: 10px;
+  width: 250px;
+  height: 161px;
+  top: 70px;
+}
+
+.div-option{
+  background-image: url("./resources/connect/box_unselected.png");
+  background-size: cover;
+  width: 230px;
+  height: 40px;
+  margin-left: 10px;
+  margin-top: 15px;
+  padding-top: 18px;
+}
+.div-option:hover{
+  background-image: url("./resources/connect/box_hover.png");
+  cursor: pointer;
+}
+
+.txt-option{
+  color: #FFFFFF;
+  cursor: pointer;
+  margin-left: 15px;
+}
+.img-option{
+  max-width: 40px;
+  max-height: 30px;
+  margin-right: 20px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.img-option-copy{
+  max-width: 40px;
+  max-height: 40px;
+  margin-right: 10px;
+  vertical-align: top;
 }
